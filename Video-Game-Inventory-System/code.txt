@@ -1,0 +1,128 @@
+CREATE DATABASE game_shop;
+	use game_shop;
+    CREATE TABLE game_shop.video_games (
+  game_id INT PRIMARY KEY AUTO_INCREMENT,  
+  game_name VARCHAR(100) NOT NULL,
+  genre VARCHAR(50),
+  platform VARCHAR(20) NOT NULL, 
+  release_year YEAR,
+  rating ENUM('E','E10+','T','M','AO') NOT NULL,
+  num_in_stock SMALLINT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE game_shop.rentals (
+  rental_id INT PRIMARY KEY AUTO_INCREMENT, 
+  game_id INT NOT NULL,   
+  customer_name VARCHAR(50) NOT NULL,
+  rental_date DATE NOT NULL,   
+  return_date DATE,    
+  FOREIGN KEY (game_id) REFERENCES game_shop.video_games(game_id)
+);
+
+ALTER TABLE game_shop.rentals 
+DROP FOREIGN KEY rentals_ibfk_1;
+
+INSERT INTO game_shop.video_games (game_name, genre, platform, release_year, rating, num_in_stock)
+VALUES
+  ('Elden Ring', 'RPG', 'PlayStation 5', 2022, 'M', 5),
+  ('Pokemon Scarlet', 'RPG', 'Nintendo Switch', 2022, 'E', 8),
+  ('Call of Duty: Modern Warfare II', 'Shooter', 'Xbox Series X', 2022, 'M', 10), 
+  ('Spider-Man', 'Action-Adventure', 'PlayStation 4', 2018, 'T', 7),
+  ('Super Smash Bros. Ultimate',  'Fighting', 'Nintendo Switch', 2018, 'E10+', 6),
+  ('Horizon Forbidden West', 'Action RPG', 'PlayStation 5', 2022, 'T', 4),
+  ('Gran Turismo 7', 'Racing', 'PlayStation 5', 2022, 'E', 6),
+  ('FIFA 23', 'Sports', 'Xbox Series X', 2022, 'E', 10),
+  ('God of War: Ragnarok','Action-Adventure', 'PlayStation 5', 2022, 'M', 11),
+  ('Mario Kart 8 Deluxe','Racing', 'Nintendo Switch', 2022, 'E', 12),
+  ('A Plague Tale: Requiem', 'Adventure', 'Xbox Series X', 2022, 'M', 8),
+  ('Gotham Knights', 'Action-Adventure', 'PlayStation 5', 2022, 'T', 5),        
+  ('Pokemon Violet', 'RPG', 'Nintendo Switch', 2022, 'E', 9),    
+  ('Resident Evil 4', 'Survival Horror', 'PlayStation 4', 2022, 'M', 6),
+  ('Call of Duty: Vanguard', 'Shooter', 'Xbox Series X', 2021, 'M', 10),
+  ('NBA 2K23', 'Sports', 'Nintendo Switch', 2022, 'E', 8),
+  ('Persona 5 Royal', 'RPG', 'PlayStation 4', 2019, 'M', 4),
+  ('Ghost of Tsushima', 'Action-Adventure', 'PlayStation 5', 2020, 'M', 6),
+  ('Death Stranding', 'Adventure', 'PlayStation 5', 2019, 'M', 4),
+  ('The Last of Us: Part I','Action-Adventure', 'PlayStation 5', 2022, 'M', 7),
+  ('Mario Party Superstars','Party', 'Nintendo Switch', 2021, 'E', 8),  
+  ('Stray', 'Adventure','PlayStation 5', 2022,'T',4),
+  ('Sonic Frontiers','Platformer','Nintendo Switch',2022,'E',6),
+  ('Overwatch 2','Shooter','Xbox Series X',2022,'T',10),  
+  ('Fortnite','Battle Royale','Nintendo Switch',2017,'T',8),
+  ('Minecraft','Sandbox','PlayStation 4',2011,'E10+',12),
+  ('Cyberpunk 2077','RPG','Xbox Series X',2022,'M',6),
+  ('Animal Crossing: New Horizons','Simulation','Nintendo Switch',2020,'E',8),    
+  ('Returnal','Shooter','PlayStation 5',2021,'T',5),
+  ('Valheim','Survival','Xbox Series X',2021,'T',4),
+  ('Dying Light 2','Survival Horror','PlayStation 5',2022,'M',6),
+  ('It Takes Two','Platformer','Xbox Series X',2021,'T',8),
+  ('Forza Horizon 5','Racing','Xbox Series X',2021,'E',10), 
+  ('New Super Mario Bros. U Deluxe','Platformer','Nintendo Switch',2019,'E',10),
+  ('Hades','Rogue-like','Nintendo Switch',2020,'T',6),
+  ('Metroid Dread','Action-Adventure','Nintendo Switch',2021,'T',8),
+  ('Battlefield 2042','Shooter','PlayStation 5',2021,'M',12),
+  ('WWE 2K22','Sports','Xbox Series X',2022,'T',10),
+  ('Mario + Rabbids Kingdom Battle','Strategy','Nintendo Switch',2017,'E10+',5);
+  
+  INSERT INTO game_shop.rentals (game_id, customer_name, rental_date, return_date) 
+VALUES 
+  (10, 'John Smith', '2022-11-15', '2022-11-25'),
+  (11, 'Sarah Davis', '2022-11-20', NULL),
+  (1, 'Liam Miller', '2022-11-23', '2022-11-26'),
+  (22, 'Emily Booker', '2022-11-24', NULL), 
+  (42, 'Jacob Robinson', '2022-11-27', '2022-12-07'), 
+  (30, 'Michael Lee', '2022-12-08', NULL),
+  (17, 'Abby Smith', '2022-12-01', '2022-12-15'),
+  (22, 'Johnny Winter', '2022-12-03', '2022-12-08'),
+  (27, 'Samuel Davies', '2022-12-05', NULL),
+  (15, 'David Summers', '2022-12-11', NULL),
+  (3, 'Isabella Williams', '2022-12-17', NULL),
+  (43, 'Liam Martin', '2022-12-02', '2022-12-05'), 
+  (11, 'Mason Martin', '2022-12-13', NULL),
+  (4, 'Sophia Miller', '2022-11-29', '2022-12-28'),
+  (35, 'Joe Bennet', '2022-12-03', '2022-12-14'),
+  (25, 'Stephanie Windsor', '2022-12-21', NULL),
+  (6, 'Amelia Moore', '2022-12-05', NULL),
+  (50, 'Noah Martinez', '2022-12-22', NULL),
+  (19, 'Olivia White', '2022-12-07', '2022-12-29'),
+  (29, 'Lucas Williams', '2022-12-09', NULL),
+  (41, 'Ava Wilson', '2022-12-11', '2022-12-30'),
+  (14, 'Ethan Lee', '2022-12-13', '2023-01-06'),
+  (7, 'Isla Martinez', '2022-11-17', '2022-11-27'),
+  (8, 'Oliver Smith', '2022-11-19', '2022-12-02'),
+  (12, 'Lily Johnson', '2022-11-28', '2022-12-07'),
+  (20, 'Elijah Wood', '2022-11-30', '2022-12-10'),
+  (23, 'William Moore', '2022-12-04', NULL),
+  (32, 'James White', '2022-12-06', '2022-12-19'), 
+  (44, 'Olivia Davis', '2022-12-12', NULL),
+  (38, 'Noah Bennett', '2022-12-14', NULL),
+  (47, 'Amelia Martin', '2022-12-16', '2023-01-04'),
+  (40, 'Emma Wilson', '2022-12-18', NULL),
+  (5, 'Oliver Williams', '2022-11-15', '2022-11-29'),
+  (16, 'Lily Wood', '2022-11-17', '2022-12-01'), 
+  (28, 'William Davis', '2022-11-19', '2022-12-05'),
+  (34, 'Sophia White', '2022-11-21', '2022-12-06'),
+  (48, 'Jacob Wilson', '2022-11-23', NULL),
+  (39, 'Isabella Smith', '2022-11-25', '2022-12-09'),
+  (46, 'Mason Moore', '2022-11-27', NULL),
+  (24, 'Evelyn Martin', '2022-11-29', '2022-12-14'),
+  (37, 'Henry Johnson', '2022-12-01', NULL),
+  (18, 'Elizabeth Davies', '2022-12-03', '2022-12-17'),
+  (31, 'Daniel Williams', '2022-12-05', NULL);
+  
+  -- Print all records in video_games
+SELECT * FROM game_shop.video_games;
+
+-- Print all records in rentals 
+SELECT * FROM game_shop.rentals;
+
+
+SELECT
+  video_games.game_id, 
+  video_games.game_name,
+  video_games.platform,
+  rentals.customer_name, 
+  rentals.rental_date
+FROM game_shop.video_games  
+JOIN game_shop.rentals 
+ON video_games.game_id = rentals.game_id;
